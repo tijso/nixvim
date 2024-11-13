@@ -64,12 +64,17 @@
             "ct"
           ]
           [
+            " Repos"
+            ":cd $HOME/repos | Telescope find_files<CR>"
+            "r"
+          ]
+          [
             "󰧑 SecondBrain"
             "edit ~/projects/personal/SecondBrain"
             "sb"
           ]
           [
-            ">Quit NVIM"
+            "> Quit Nvim"
             ":qa<CR>"
             "q"
           ]
