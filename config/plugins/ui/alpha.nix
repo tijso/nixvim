@@ -1,7 +1,6 @@
 {
   plugins.alpha = {
     enable = true;
-    # iconsEnabled = true;
     layout = [
       {
         type = "padding";
@@ -21,7 +20,7 @@
           "██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
           "╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
           "                                            "
-          "       git@github.com:tijso/nix-config.git  "
+          "     git@github.com:tijso/nixvim.git        "
         ];
       }
       {

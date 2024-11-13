@@ -6,6 +6,13 @@
         globalstatus = true;
         icons_enabled = true;
         theme = "catppuccin";
+        disabledFileypes = {
+          statusline = [
+            "alpha"
+            "neo-tree"
+            "startup"
+          ];
+        };
         section_separators = {
           right = "";
           left = " ";
@@ -83,8 +90,12 @@
               gui = "bold";
             };
             diagnostics_color = {
-              color_error = {fg = "#F38BA8";};
-              color_warn = {fg = "#FAE3B0";};
+              color_error = {
+                fg = "#F38BA8";
+              };
+              color_warn = {
+                fg = "#FAE3B0";
+              };
             };
             symbols = {
               error = " ";

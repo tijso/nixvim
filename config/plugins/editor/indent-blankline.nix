@@ -10,7 +10,10 @@
         show_start = true;
       };
       exclude = {
-        buftypes = ["terminal" "nofile"];
+        buftypes = [
+          "terminal"
+          "nofile"
+        ];
         filetypes = [
           "help"
           "alpha"
