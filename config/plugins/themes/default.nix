@@ -1,8 +1,8 @@
 {
   imports = [
-    ./catppuccin
-    # ./kanagawa
-    # ./rose-pine
-    # ./tokyonight
+    ./catppuccin.nix
+    # ./kanagawa.nix
+    # ./rose-pine.nix
+    # ./tokyonight.nix
   ];
 }
