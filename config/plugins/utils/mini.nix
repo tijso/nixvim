@@ -3,7 +3,7 @@
     enable = true;
     modules = {
       icons = {};
-      mockDevIcons = true;
+      # mockDevIcons = true;
       surround = {};
       indentscope = {
         symbol = "│";
