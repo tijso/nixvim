@@ -1,55 +1,50 @@
 {
-  autoGroups = {
-    highlight_yank = { };
-    vim_enter = { };
-    indentscope = { };
-    restore_cursor = { };
-  };
-
   autoCmd = [
+    # Vertically center document when entering insert mode
     {
-      group = "highlight_yank";
-      event = [ "TextYankPost" ];
-      pattern = "*";
-      callback = {
-        __raw = ''
-          function()
-            vim.highlight.on_yank()
-          end
-        '';
-      };
+      event = "InsertEnter";
+      command = "norm zz";
     }
+
+    # Open help in a vertical split
     {
-      group = "vim_enter";
-      event = [ "VimEnter" ];
-      pattern = "*";
-      callback = {
-        __raw = ''
-          function()
-            vim.cmd('Startup')
-          end
-        '';
-      };
+      event = "FileType";
+      pattern = "help";
+      command = "wincmd L";
     }
+
+    # Close Telescope prompt in insert mode by clicking escape
     {
-      group = "indentscope";
       event = [ "FileType" ];
-      pattern = [
-        "help"
-        "Startup"
-        "startup"
-        "neo-tree"
-        "Trouble"
-        "trouble"
-        "notify"
-      ];
-      callback = {
-        __raw = ''
-          function()
-            vim.b.miniindentscope_disable = true
-          end
-        '';
-      };
+      pattern = "TelescopePrompt";
+      command = "inoremap <buffer><silent> <ESC> <ESC>:close!<CR>";
     }
+
+    # Enable spellcheck for some filetypes
+    {
+      event = "FileType";
+      pattern = [
+        "tex"
+        "latex"
+        "markdown"
+      ];
+      command = "setlocal spell spelllang=en,fr";
+    }
+    # Hilight yank text
+    {
+      event = "TextYankPost";
+      pattern = "*";
+      command = "lua vim.highlight.on_yank{timeout=500}";
+    }
+    # Enter git buffer in insert mode
+    {
+      event = "FileType";
+      pattern = [
+        "gitcommit"
+        "gitrebase"
+      ];
+      command = "startinsert | 1";
+    }
+
   ];
 }
