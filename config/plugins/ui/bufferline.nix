@@ -1,108 +1,84 @@
 {
-  plugins = {
-    bufferline = {
-      enable = true;
-      settings = {
-        options = {
-          diagnostics = "nvim_lsp";
-          mode = "buffers";
-
-          close_icon = " ";
-          buffer_close_icon = "󰱝 ";
-          modified_icon = "󰔯 ";
-
-          offsets = [
-            {
-              filetype = "neo-tree";
-              text = "Neo-tree";
-              highlight = "Directory";
-              text_align = "left";
-            }
-          ];
-        };
-      };
+  config,
+  lib,
+  ...
+}:
+{
+  plugins.bufferline = {
+    enable = true;
+    settings.options = {
+      closeCommand = "Bdelete! %d";
+      diagnostics = "nvim_lsp";
+      diagnostics_indicator =
+        # Lua
+        ''
+          function(count, level, diagnostics_dict, context)
+            local s = ""
+            for e, n in pairs(diagnostics_dict) do
+              local sym = e == "error" and " "
+                or (e == "warning" and " " or "" )
+              if(sym ~= "") then
+                s = s .. " " .. n .. sym
+              end
+            end
+            return s
+          end
+        '';
+      offsets = [
+        { filetype = "NvimTree"; }
+        { text = "File Explorer"; }
+        { highlight = "Directory"; }
+        { separator = true; }
+      ];
     };
   };
-
-  keymaps = [
-    {
-      mode = "n";
-      key = "]b";
-      action = "<cmd>BufferLineCycleNext<cr>";
-      options = {
-        desc = "Cycle to next buffer";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "[b";
-      action = "<cmd>BufferLineCyclePrev<cr>";
-      options = {
-        desc = "Cycle to previous buffer";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<S-l>";
-      action = "<cmd>BufferLineCycleNext<cr>";
-      options = {
-        desc = "Cycle to next buffer";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<S-h>";
-      action = "<cmd>BufferLineCyclePrev<cr>";
-      options = {
-        desc = "Cycle to previous buffer";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<leader>bd";
-      action = "<cmd>bdelete<cr>";
-      options = {
-        desc = "Delete buffer";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<leader>bl";
-      action = "<cmd>BufferLineCloseLeft<cr>";
-      options = {
-        desc = "Delete buffers to the left";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<leader>bo";
-      action = "<cmd>BufferLineCloseOthers<cr>";
-      options = {
-        desc = "Delete other buffers";
-      };
-    }
-
-    {
-      mode = "n";
-      key = "<leader>bp";
-      action = "<cmd>BufferLineTogglePin<cr>";
-      options = {
-        desc = "Toggle pin";
-      };
-    }
-
+  keymaps = lib.mkIf config.plugins.bufferline.enable [
     {
       mode = "n";
       key = "<leader>bP";
-      action = "<Cmd>BufferLineGroupClose ungrouped<CR>";
+      action = "<cmd>BufferLineTogglePin<cr>";
       options = {
-        desc = "Delete non-pinned buffers";
+        desc = "Pin buffer toggle";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>bp";
+      action = "<cmd>BufferLinePick<cr>";
+      options = {
+        desc = "Pick Buffer";
+      };
+    }
+    {
+      key = "<leader>bc";
+      action = ":%bd|e#<cr>";
+      options = {
+        silent = true;
+        desc = "Close all buffers except current";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>bsd";
+      action = "<cmd>BufferLineSortByDirectory<cr>";
+      options = {
+        desc = "Sort By Directory";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>bse";
+      action = "<cmd>BufferLineSortByExtension<cr>";
+      options = {
+        desc = "Sort By Extension";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>bsr";
+      action = "<cmd>BufferLineSortByRelativeDirectory<cr>";
+      options = {
+        desc = "Sort By Relative Directory";
       };
     }
   ];
