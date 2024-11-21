@@ -45,13 +45,6 @@
       ];
     };
 
-    # Go specific plugins
-    go-nvim = {
-      enable = true;
-      goimport = "gopls"; # Use gopls for imports
-      gofmt = "gopls"; # Use gopls for formatting
-    };
-
     # Debugging support
     dap = {
       enable = true;
