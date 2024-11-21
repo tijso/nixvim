@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   plugins = {
     # Enable native LSP
@@ -35,17 +36,25 @@
       };
     };
 
-    # Debugging support
+    # Debug Adapter Protocol (DAP) Configuration
     dap = {
       enable = true;
       adapters = {
-        servers = {
-          "go" = {
-            type = "executable";
-            command = "dlv";
-            args = [ "dap" ];
-          };
+        go = {
+          type = "executable";
+          command = "dlv";
+          args = [ "dap" ];
         };
+      };
+      configurations = {
+        go = [
+          {
+            type = "go";
+            request = "launch";
+            name = "Debug Go Program";
+            program = "\${file}";
+          }
+        ];
       };
     };
   };
@@ -71,19 +80,18 @@
       action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
       options.desc = "Code Actions";
     }
-
-    # Go Specific Keymaps
+    # Debugging Keymaps
     {
       mode = "n";
-      key = "<leader>gi";
-      action = "<cmd>GoInstallDeps<CR>";
-      options.desc = "Install Go Dependencies";
+      key = "<leader>db";
+      action = "<cmd>lua require('dap').toggle_breakpoint()<CR>";
+      options.desc = "Toggle Breakpoint";
     }
     {
       mode = "n";
-      key = "<leader>gt";
-      action = "<cmd>GoTest<CR>";
-      options.desc = "Run Go Tests";
+      key = "<leader>dc";
+      action = "<cmd>lua require('dap').continue()<CR>";
+      options.desc = "Continue Debugging";
     }
   ];
 
@@ -96,6 +104,29 @@
       pattern = "*.go",
       callback = function()
         vim.lsp.buf.format({ async = false })
+      end
+    })
+
+    -- Additional Go setup
+    local function go_org_imports(wait_ms)
+      local params = vim.lsp.util.make_range_params()
+      params.context = {only = {"source.organizeImports"}}
+      local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+      for _, res in pairs(result or {}) do
+        for _, r in pairs(res.result or {}) do
+          if r.edit then
+            vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+          else
+            vim.lsp.buf.execute_command(r.command)
+          end
+        end
+      end
+    end
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",
+      callback = function()
+        go_org_imports(1000)
       end
     })
   '';
