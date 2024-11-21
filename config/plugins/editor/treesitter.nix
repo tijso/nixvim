@@ -15,7 +15,9 @@
       };
       treesitter-context = {
         enable = true;
-        settings = {max_lines = 2;};
+        settings = {
+          max_lines = 2;
+        };
       };
       incrementalSelection = {
         enable = true;
@@ -31,6 +33,8 @@
         "dot"
         "fish"
         "go"
+        "gomod"
+        "gosum"
         "html"
         "javascript"
         "jsdoc"

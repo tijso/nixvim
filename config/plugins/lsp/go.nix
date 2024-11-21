@@ -35,16 +35,6 @@
       };
     };
 
-    # Treesitter for better syntax highlighting
-    treesitter = {
-      enable = true;
-      ensureInstalled = [
-        "go"
-        "gomod"
-        "gosum"
-      ];
-    };
-
     # Debugging support
     dap = {
       enable = true;
