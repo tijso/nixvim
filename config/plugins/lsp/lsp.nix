@@ -32,9 +32,9 @@
         pyright = {
           enable = true;
         };
-        # gopls = {
-        #   enable = true;
-        # };
+        gopls = {
+          enable = true;
+        };
         terraformls = {
           enable = true;
         };
