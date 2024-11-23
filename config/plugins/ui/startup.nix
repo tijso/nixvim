@@ -65,8 +65,8 @@
           ]
           [
             " Projects"
-            ":cd $HOME/projects/ | Telescope find_files<CR>"
-            "r"
+            ":cd $HOME/projects | Telescope find_files<CR>"
+            "p"
           ]
           [
             "󰧑 SecondBrain"
