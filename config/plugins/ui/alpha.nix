@@ -156,26 +156,25 @@
       {
         type = "button";
         val = "󰧑  SecondBrain";
-        on_press.raw = "edit  ~/projects/personal/SecondBrain";
+        on_press.raw = "require('telescope.builtin').find_files";
         opts = {
           keymap = [
             "n"
             "sb"
+            ":cd $HOME/projects/personal/SecondBrain"
             {
               noremap = true;
               silent = true;
               nowait = true;
             }
           ];
-          shortcut = "r";
-
+          shortcut = "sb";
           position = "center";
           cursor = 3;
           width = 38;
           align_shortcut = "right";
           hl_shortcut = "Keyword";
         };
-
       }
 
       {
