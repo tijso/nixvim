@@ -28,8 +28,7 @@
           "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     "
           "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     "
           "                                   "
-          "                                   "
-          "git@github.com:tijso/nixvim.git"
+          "    :wgit@github.com:tijso/nixvim.git"
         ];
       }
       {
