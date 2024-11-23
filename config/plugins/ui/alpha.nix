@@ -37,7 +37,7 @@
       }
       {
         type = "button";
-        val = "󰺄  > New File";
+        val = "󰺄  New File";
         on_press.raw = "require('telescope.builtin').find_files";
         opts = {
           # hl = "comment";
@@ -67,7 +67,7 @@
       }
       {
         type = "button";
-        val = "  > Find File";
+        val = "  Find File";
         on_press.raw = "require('telescope.builtin').find_files";
         opts = {
           # hl = "comment";
@@ -97,7 +97,7 @@
       }
       {
         type = "button";
-        val = "  > Find Recent";
+        val = "  Find Recent";
         on_press.raw = "require('telescope.builtin').find_files";
         opts = {
           # hl = "comment";
@@ -126,7 +126,7 @@
       }
       {
         type = "button";
-        val = " > Repos";
+        val = "  Repos";
         on_press.raw = "require('telescope.builtin').find_files";
         opts = {
           # hl = "comment";
@@ -161,7 +161,7 @@
           keymap = [
             "n"
             "sb"
-            ":cd $HOME/projects/personal/SecondBrain"
+            ":cd $HOME/projects/personal/SecondBrain | Telescope find_files<CR>"
             {
               noremap = true;
               silent = true;
