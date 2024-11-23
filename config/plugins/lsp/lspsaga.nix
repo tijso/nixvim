@@ -18,7 +18,7 @@
       showCodeAction = true;
     };
     symbolInWinbar = {
-      enable = false; # Breadcrumbs
+      enable = true; # Breadcrumbs
     };
     codeAction = {
       extendGitSigns = true;
