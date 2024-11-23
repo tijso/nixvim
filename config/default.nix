@@ -50,12 +50,13 @@ _: {
     ./plugins/utils/extra_plugins.nix
     ./plugins/utils/fzf.nix
     ./plugins/utils/harpoon.nix
-    ./plugins/utils/markdown-preview.nix
+    # ./plugins/utils/markdown-preview.nix
     ./plugins/utils/mini.nix
-    ./plugins/utils/obsidian.nix
+    # ./plugins/utils/obsidian.nix
     ./plugins/utils/telescope.nix
     ./plugins/utils/toggleterm.nix
     # ./plugins/utils/trim.nix
     ./plugins/utils/whichkey.nix
+    ./plugins/utils/obsidian
   ];
 }
