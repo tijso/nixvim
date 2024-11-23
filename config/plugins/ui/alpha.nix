@@ -125,7 +125,7 @@
           keymap = [
             "n"
             "r"
-            ":cd $HOME/repos | Telescope find_files<CR>"
+            ":cd $HOME/projects/personal | Telescope find_files<CR>"
             {
               noremap = true;
               silent = true;

@@ -31,10 +31,10 @@ _: {
     ./plugins/editor/undotree.nix
 
     # UI plugins
-    # ./plugins/ui/alpha.nix
+    ./plugins/ui/alpha.nix
     ./plugins/ui/bufferline.nix
     ./plugins/ui/lualine.nix
-    ./plugins/ui/startup.nix
+    # ./plugins/ui/startup.nix
 
     # LSP and formatting
     ./plugins/lsp/conform.nix
