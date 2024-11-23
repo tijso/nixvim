@@ -1,6 +1,6 @@
 {
   plugins.obsidian = {
-    enable = false;
+    enable = true;
     settings = {
       workspaces = [
         {
@@ -12,7 +12,7 @@
         subdir = "templates";
         dateFormat = "%Y-%m-%d";
         timeFormat = "%H:%M";
-        substitutions = {};
+        substitutions = { };
       };
 
       dailyNotes = {
