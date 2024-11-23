@@ -64,8 +64,8 @@
             "ct"
           ]
           [
-            " Repos"
-            ":cd $HOME/repos | Telescope find_files<CR>"
+            " Projects"
+            ":cd $HOME/projects/ | Telescope find_files<CR>"
             "r"
           ]
           [
