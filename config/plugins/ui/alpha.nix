@@ -155,6 +155,35 @@
       }
       {
         type = "button";
+        val = "󰧑  SecondBrain";
+        on_press.raw = "edit  ~/projects/personal/SecondBrain";
+        opts = {
+          keymap = [
+            "n"
+            "sb"
+            {
+              noremap = true;
+              silent = true;
+              nowait = true;
+            }
+          ];
+          shortcut = "r";
+
+          position = "center";
+          cursor = 3;
+          width = 38;
+          align_shortcut = "right";
+          hl_shortcut = "Keyword";
+        };
+
+      }
+
+      {
+        type = "padding";
+        val = 1;
+      }
+      {
+        type = "button";
         val = "󰗼  > Quit NVIM";
         on_press.raw = "require('telescope.builtin').find_files";
         opts = {
