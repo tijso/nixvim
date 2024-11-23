@@ -8,7 +8,7 @@
   imports = [
     ./bridge.nix
     ./markdown.nix
-    ./todo.nix
+    # ./todo.nix
   ];
 
   plugins.obsidian = {
