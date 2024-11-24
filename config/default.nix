@@ -57,6 +57,6 @@ _: {
     ./plugins/utils/toggleterm.nix
     # ./plugins/utils/trim.nix
     ./plugins/utils/whichkey.nix
-    ./plugins/utils/obsidian
+    # ./plugins/utils/obsidian
   ];
 }
