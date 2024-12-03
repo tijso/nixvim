@@ -19,7 +19,7 @@ _: {
     ./plugins/snippets/luasnip.nix
 
     # Editor plugins and configurations
-    # ./plugins/editor/copilot-chat.nix
+    ./plugins/editor/copilot-chat.nix
     ./plugins/editor/illuminate.nix
     ./plugins/editor/indent-blankline.nix
     ./plugins/editor/navic.nix
