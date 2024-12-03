@@ -1,162 +1,167 @@
-{ pkgs, ... }:
 {
   plugins = {
-    lsp-lines = {
+    which-key = {
       enable = true;
-    };
-    lsp-format = {
-      enable = true;
-    };
-    helm = {
-      enable = true;
-    };
-    lsp = {
-      enable = true;
-      inlayHints = true;
-      servers = {
-        html = {
-          enable = true;
-        };
-        lua_ls = {
-          enable = true;
-        };
-        nil_ls = {
-          enable = true;
-        };
-        ts_ls = {
-          enable = true;
-        };
-        marksman = {
-          enable = true;
-        };
-        pyright = {
-          enable = true;
-        };
-        gopls = {
-          enable = true;
-        };
-        terraformls = {
-          enable = true;
-        };
-        ansiblels = {
-          enable = true;
-        };
-        jsonls = {
-          enable = true;
-        };
-        helm_ls = {
-          enable = true;
-          extraOptions = {
-            settings = {
-              "helm_ls" = {
-                yamlls = {
-                  path = "${pkgs.yaml-language-server}/bin/yaml-language-server";
-                };
-              };
-            };
+      registrations = {
+        "<leader>l" = {
+          name = "+LSP";
+          d = {
+            name = "+Diagnostics";
+            d = "Document Symbols";
+            w = "Workspace Symbols";
+            l = "Line Diagnostics";
+            q = "Quickfix";
           };
-        };
-        yamlls = {
-          enable = true;
-          extraOptions = {
-            settings = {
-              yaml = {
-                schemas = {
-                  kubernetes = "'*.yaml";
-                  "http://json.schemastore.org/github-workflow" = ".github/workflows/*";
-                  "http://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
-                  "http://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
-                  "http://json.schemastore.org/chart" = "Chart.{yml,yaml}";
-                  "https://json.schemastore.org/dependabot-v2" = ".github/dependabot.{yml,yaml}";
-                  "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" = "*docker-compose*.{yml,yaml}";
-                  "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json" = "*flow*.{yml,yaml}";
-                };
-              };
-            };
+          r = "Rename Symbol";
+          a = "Code Actions";
+          f = "Format Document";
+          w = {
+            name = "+Workspace";
+            a = "Add Workspace Folder";
+            r = "Remove Workspace Folder";
+            l = "List Workspace Folders";
           };
         };
       };
 
+      # Optional: Which-Key settings
+      settings = {
+        plugins = {
+          marks = true;
+          registers = true;
+        };
+        window = {
+          border = "single";
+          position = "bottom";
+          margin = {
+            top = 1;
+            right = 1;
+            bottom = 1;
+            left = 1;
+          };
+        };
+      };
+    };
+
+    lsp = {
+      enable = true;
+
       keymaps = {
-        silent = true;
         lspBuf = {
-          gd = {
-            action = "definition";
-            desc = "Goto Definition";
-          };
-          gr = {
-            action = "references";
-            desc = "Goto References";
-          };
-          gD = {
-            action = "declaration";
-            desc = "Goto Declaration";
-          };
-          gI = {
-            action = "implementation";
-            desc = "Goto Implementation";
-          };
-          gT = {
-            action = "type_definition";
-            desc = "Type Definition";
-          };
-          K = {
-            action = "hover";
-            desc = "Hover";
-          };
-          "<leader>cw" = {
-            action = "workspace_symbol";
-            desc = "Workspace Symbol";
-          };
-          "<leader>cr" = {
-            action = "rename";
-            desc = "Rename";
-          };
+          "K" = "hover";
+          "gd" = "definition";
+          "gD" = "declaration";
+          "gi" = "implementation";
+          "gr" = "references";
         };
+
         diagnostic = {
-          "<leader>cd" = {
-            action = "open_float";
-            desc = "Line Diagnostics";
-          };
-          "[d" = {
-            action = "goto_next";
-            desc = "Next Diagnostic";
-          };
-          "]d" = {
-            action = "goto_prev";
-            desc = "Previous Diagnostic";
-          };
+          "[d" = "goto_prev";
+          "]d" = "goto_next";
         };
+      };
+
+      extraKeymaps = [
+        # Diagnostic Submenu
+        {
+          mode = "n";
+          key = "<leader>ldd";
+          action = "<cmd>lua vim.lsp.buf.document_symbol()<CR>";
+          options.desc = "Document Symbols";
+        }
+        {
+          mode = "n";
+          key = "<leader>ldw";
+          action = "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>";
+          options.desc = "Workspace Symbols";
+        }
+        {
+          mode = "n";
+          key = "<leader>ldl";
+          action = "<cmd>lua vim.diagnostic.open_float()<CR>";
+          options.desc = "Line Diagnostics";
+        }
+        {
+          mode = "n";
+          key = "<leader>ldq";
+          action = "<cmd>lua vim.diagnostic.setqflist()<CR>";
+          options.desc = "Quickfix Diagnostics";
+        }
+
+        # Other LSP Actions
+        {
+          mode = "n";
+          key = "<leader>lr";
+          action = "<cmd>lua vim.lsp.buf.rename()<CR>";
+          options.desc = "Rename Symbol";
+        }
+        {
+          mode = "n";
+          key = "<leader>la";
+          action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+          options.desc = "Code Actions";
+        }
+        {
+          mode = "n";
+          key = "<leader>lf";
+          action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
+          options.desc = "Format Document";
+        }
+
+        # Workspace Folder Management
+        {
+          mode = "n";
+          key = "<leader>lwa";
+          action = "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>";
+          options.desc = "Add Workspace Folder";
+        }
+        {
+          mode = "n";
+          key = "<leader>lwr";
+          action = "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>";
+          options.desc = "Remove Workspace Folder";
+        }
+        {
+          mode = "n";
+          key = "<leader>lwl";
+          action = "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>";
+          options.desc = "List Workspace Folders";
+        }
+      ];
+
+      servers = {
+        nixd.enable = true;
+        html.enable = true;
+        cssls.enable = true;
+        tsserver.enable = true;
+        pyright.enable = true;
+        rust-analyzer.enable = true;
+        gopls.enable = true;
+        lua-ls.enable = true;
+        yamlls.enable = true;
+        jsonls.enable = true;
+        dockerls.enable = true;
+      };
+    };
+
+    trouble = {
+      enable = true;
+      settings = {
+        position = "bottom";
+        height = 10;
+        width = 50;
       };
     };
   };
-  extraPlugins = with pkgs.vimPlugins; [
-    ansible-vim
-  ];
 
   extraConfigLua = ''
-    local _border = "rounded"
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover, {
-        border = _border
-      }
-    )
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-      vim.lsp.handlers.signature_help, {
-        border = _border
-      }
-    )
-
-    vim.diagnostic.config{
-      float={border=_border}
-    };
-
-    require('lspconfig.ui.windows').default_options = {
-      border = _border
-    }
+    -- Additional LSP setup
+    vim.diagnostic.config({
+      virtual_text = true,
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    })
   '';
 }
