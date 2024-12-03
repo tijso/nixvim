@@ -1,96 +1,162 @@
+{ pkgs, ... }:
 {
   plugins = {
-    which-key = {
+    lsp-lines = {
       enable = true;
-      registrations = {
-        "<leader>l" = {
-          name = "+LSP";
-          d = {
-            name = "+Diagnostics";
-            d = "Document Symbols";
-            w = "Workspace Symbols";
-            l = "Line Diagnostics";
-            q = "Quickfix";
-          };
-          r = "Rename Symbol";
-          a = "Code Actions";
-          f = "Format Document";
-          w = {
-            name = "+Workspace";
-            a = "Add Workspace Folder";
-            r = "Remove Workspace Folder";
-            l = "List Workspace Folders";
-          };
-        };
-      };
     };
-
+    lsp-format = {
+      enable = true;
+    };
+    helm = {
+      enable = true;
+    };
     lsp = {
       enable = true;
+      inlayHints = true;
+      servers = {
+        html = {
+          enable = true;
+        };
+        lua_ls = {
+          enable = true;
+        };
+        nil_ls = {
+          enable = true;
+        };
+        ts_ls = {
+          enable = true;
+        };
+        marksman = {
+          enable = true;
+        };
+        pyright = {
+          enable = true;
+        };
+        gopls = {
+          enable = true;
+        };
+        terraformls = {
+          enable = true;
+        };
+        ansiblels = {
+          enable = true;
+        };
+        jsonls = {
+          enable = true;
+        };
+        helm_ls = {
+          enable = true;
+          extraOptions = {
+            settings = {
+              "helm_ls" = {
+                yamlls = {
+                  path = "${pkgs.yaml-language-server}/bin/yaml-language-server";
+                };
+              };
+            };
+          };
+        };
+        yamlls = {
+          enable = true;
+          extraOptions = {
+            settings = {
+              yaml = {
+                schemas = {
+                  kubernetes = "'*.yaml";
+                  "http://json.schemastore.org/github-workflow" = ".github/workflows/*";
+                  "http://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
+                  "http://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
+                  "http://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
+                  "http://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
+                  "http://json.schemastore.org/chart" = "Chart.{yml,yaml}";
+                  "https://json.schemastore.org/dependabot-v2" = ".github/dependabot.{yml,yaml}";
+                  "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" = "*docker-compose*.{yml,yaml}";
+                  "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json" = "*flow*.{yml,yaml}";
+                };
+              };
+            };
+          };
+        };
+      };
 
       keymaps = {
-        # Standard LSP keymaps
+        silent = true;
         lspBuf = {
-          "K" = "hover";
-          "gd" = "definition";
-          "gD" = "declaration";
-          "gi" = "implementation";
-          "gr" = "references";
+          gd = {
+            action = "definition";
+            desc = "Goto Definition";
+          };
+          gr = {
+            action = "references";
+            desc = "Goto References";
+          };
+          gD = {
+            action = "declaration";
+            desc = "Goto Declaration";
+          };
+          gI = {
+            action = "implementation";
+            desc = "Goto Implementation";
+          };
+          gT = {
+            action = "type_definition";
+            desc = "Type Definition";
+          };
+          K = {
+            action = "hover";
+            desc = "Hover";
+          };
+          "<leader>cw" = {
+            action = "workspace_symbol";
+            desc = "Workspace Symbol";
+          };
+          "<leader>cr" = {
+            action = "rename";
+            desc = "Rename";
+          };
         };
-
         diagnostic = {
-          "[d" = "goto_prev";
-          "]d" = "goto_next";
+          "<leader>cd" = {
+            action = "open_float";
+            desc = "Line Diagnostics";
+          };
+          "[d" = {
+            action = "goto_next";
+            desc = "Next Diagnostic";
+          };
+          "]d" = {
+            action = "goto_prev";
+            desc = "Previous Diagnostic";
+          };
         };
-
-        # Custom LSP keymaps
-        "n" = {
-          "<leader>ldd" = "lua vim.lsp.buf.document_symbol()";
-          "<leader>ldw" = "lua vim.lsp.buf.workspace_symbol()";
-          "<leader>ldl" = "lua vim.diagnostic.open_float()";
-          "<leader>ldq" = "lua vim.diagnostic.setqflist()";
-          "<leader>lr" = "lua vim.lsp.buf.rename()";
-          "<leader>la" = "lua vim.lsp.buf.code_action()";
-          "<leader>lf" = "lua vim.lsp.buf.format({ async = true })";
-          "<leader>lwa" = "lua vim.lsp.buf.add_workspace_folder()";
-          "<leader>lwr" = "lua vim.lsp.buf.remove_workspace_folder()";
-          "<leader>lwl" = "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))";
-        };
-      };
-
-      servers = {
-        nixd.enable = true;
-        html.enable = true;
-        cssls.enable = true;
-        tsserver.enable = true;
-        pyright.enable = true;
-        rust-analyzer.enable = true;
-        gopls.enable = true;
-        lua-ls.enable = true;
-        yamlls.enable = true;
-        jsonls.enable = true;
-        dockerls.enable = true;
-      };
-    };
-
-    trouble = {
-      enable = true;
-      settings = {
-        position = "bottom";
-        height = 10;
-        width = 50;
       };
     };
   };
+  extraPlugins = with pkgs.vimPlugins; [
+    ansible-vim
+  ];
 
   extraConfigLua = ''
-    -- Additional LSP setup
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = true,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    })
+    local _border = "rounded"
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = _border
+      }
+    )
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+      vim.lsp.handlers.signature_help, {
+        border = _border
+      }
+    )
+
+    vim.diagnostic.config{
+      float={border=_border}
+    };
+
+    require('lspconfig.ui.windows').default_options = {
+      border = _border
+    }
   '';
 }
