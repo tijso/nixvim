@@ -23,30 +23,13 @@
           };
         };
       };
-
-      # Optional: Which-Key settings
-      settings = {
-        plugins = {
-          marks = true;
-          registers = true;
-        };
-        window = {
-          border = "single";
-          position = "bottom";
-          margin = {
-            top = 1;
-            right = 1;
-            bottom = 1;
-            left = 1;
-          };
-        };
-      };
     };
 
     lsp = {
       enable = true;
 
       keymaps = {
+        # Standard LSP keymaps
         lspBuf = {
           "K" = "hover";
           "gd" = "definition";
@@ -59,75 +42,21 @@
           "[d" = "goto_prev";
           "]d" = "goto_next";
         };
+
+        # Custom LSP keymaps
+        "n" = {
+          "<leader>ldd" = "lua vim.lsp.buf.document_symbol()";
+          "<leader>ldw" = "lua vim.lsp.buf.workspace_symbol()";
+          "<leader>ldl" = "lua vim.diagnostic.open_float()";
+          "<leader>ldq" = "lua vim.diagnostic.setqflist()";
+          "<leader>lr" = "lua vim.lsp.buf.rename()";
+          "<leader>la" = "lua vim.lsp.buf.code_action()";
+          "<leader>lf" = "lua vim.lsp.buf.format({ async = true })";
+          "<leader>lwa" = "lua vim.lsp.buf.add_workspace_folder()";
+          "<leader>lwr" = "lua vim.lsp.buf.remove_workspace_folder()";
+          "<leader>lwl" = "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))";
+        };
       };
-
-      extraKeymaps = [
-        # Diagnostic Submenu
-        {
-          mode = "n";
-          key = "<leader>ldd";
-          action = "<cmd>lua vim.lsp.buf.document_symbol()<CR>";
-          options.desc = "Document Symbols";
-        }
-        {
-          mode = "n";
-          key = "<leader>ldw";
-          action = "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>";
-          options.desc = "Workspace Symbols";
-        }
-        {
-          mode = "n";
-          key = "<leader>ldl";
-          action = "<cmd>lua vim.diagnostic.open_float()<CR>";
-          options.desc = "Line Diagnostics";
-        }
-        {
-          mode = "n";
-          key = "<leader>ldq";
-          action = "<cmd>lua vim.diagnostic.setqflist()<CR>";
-          options.desc = "Quickfix Diagnostics";
-        }
-
-        # Other LSP Actions
-        {
-          mode = "n";
-          key = "<leader>lr";
-          action = "<cmd>lua vim.lsp.buf.rename()<CR>";
-          options.desc = "Rename Symbol";
-        }
-        {
-          mode = "n";
-          key = "<leader>la";
-          action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
-          options.desc = "Code Actions";
-        }
-        {
-          mode = "n";
-          key = "<leader>lf";
-          action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
-          options.desc = "Format Document";
-        }
-
-        # Workspace Folder Management
-        {
-          mode = "n";
-          key = "<leader>lwa";
-          action = "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>";
-          options.desc = "Add Workspace Folder";
-        }
-        {
-          mode = "n";
-          key = "<leader>lwr";
-          action = "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>";
-          options.desc = "Remove Workspace Folder";
-        }
-        {
-          mode = "n";
-          key = "<leader>lwl";
-          action = "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>";
-          options.desc = "List Workspace Folders";
-        }
-      ];
 
       servers = {
         nixd.enable = true;
