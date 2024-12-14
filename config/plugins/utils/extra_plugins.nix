@@ -1,8 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   plugins = {
     nvim-autopairs.enable = true;
     nix.enable = true;
-    nvim-colorizer.enable = true;
+    colorizer.enable = true;
   };
-  extraPlugins = with pkgs.vimPlugins; [];
+  extraPlugins = with pkgs.vimPlugins; [ ];
 }
