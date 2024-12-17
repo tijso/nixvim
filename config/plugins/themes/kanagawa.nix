@@ -7,8 +7,14 @@
       terminal_colors = true;
       compile = true;
       style = "wave";
-      ui = {
-        bg_gutter = "none";
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none";
+            };
+          };
+        };
       };
       styles = {
         italic = true;
