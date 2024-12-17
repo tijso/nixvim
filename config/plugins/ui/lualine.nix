@@ -5,7 +5,7 @@
       options = {
         globalstatus = true;
         icons_enabled = true;
-        theme = "auto";
+        theme = "kanagawa";
         disabledFileypes = {
           statusline = [
             "alpha"
@@ -29,12 +29,11 @@
             __unkeyed-1 = "mode";
             separator = {
               left = "";
-              # right = "";
             };
             icon = " ";
-            color = {
-              gui = "bold";
-            };
+            # color = {
+            #   gui = "bold";
+            # };
           }
         ];
         lualine_b = [
