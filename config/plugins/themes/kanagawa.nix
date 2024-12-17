@@ -12,24 +12,9 @@
         bold = true;
         transparency = true;
       };
-      overrides = {
-        SignColumn = {
-          bg = "none";
-        };
-        FoldColumn = {
-          bg = "none";
-        };
-        LineNr = {
-          bg = "none";
-        };
-        GitSignsAdd = {
-          bg = "none";
-        };
-        GitSignsChange = {
-          bg = "none";
-        };
-        GitSignsDelete = {
-          bg = "none";
+      colors = {
+        theme = {
+          all.ui.bg_gutter = "none";
         };
       };
     };
