@@ -12,13 +12,6 @@
         bold = true;
         transparency = true;
       };
-      theme = {
-        all = {
-          ui = {
-            bg_gutter = "none";
-          };
-        };
-      };
     };
     package = pkgs.vimPlugins.kanagawa-nvim;
   };
