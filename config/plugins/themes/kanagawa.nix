@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   colorschemes.kanagawa = {
     enable = true;
     settings = {
@@ -6,6 +7,9 @@
       terminal_colors = true;
       compile = true;
       style = "wave";
+      ui = {
+        bg_gutter = "none";
+      };
       styles = {
         italic = true;
         bold = true;
