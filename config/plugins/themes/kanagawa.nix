@@ -12,9 +12,11 @@
         bold = true;
         transparency = true;
       };
-      colors = {
-        theme = {
-          all.ui.bg_gutter = "none";
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = "none";
+          };
         };
       };
     };
