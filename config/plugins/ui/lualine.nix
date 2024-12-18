@@ -31,9 +31,6 @@
               left = "";
             };
             icon = " ";
-            # color = {
-            #   gui = "bold";
-            # };
           }
         ];
         lualine_b = [
