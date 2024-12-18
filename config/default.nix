@@ -23,9 +23,9 @@ _: {
     ./plugins/editor/illuminate.nix
     ./plugins/editor/indent-blankline.nix
     ./plugins/editor/navic.nix
-    ./plugins/editor/neo-tree.nix
+    # ./plugins/editor/neo-tree.nix
     ./plugins/editor/noice.nix
-    # ./plugins/editor/oil.nix
+    ./plugins/editor/oil.nix
     ./plugins/editor/todo-comments.nix
     ./plugins/editor/treesitter.nix
     ./plugins/editor/undotree.nix
@@ -52,7 +52,6 @@ _: {
     ./plugins/utils/harpoon.nix
     # ./plugins/utils/markdown-preview.nix
     ./plugins/utils/mini.nix
-    # ./plugins/utils/obsidian.nix
     ./plugins/utils/telescope.nix
     ./plugins/utils/toggleterm.nix
     # ./plugins/utils/trim.nix
