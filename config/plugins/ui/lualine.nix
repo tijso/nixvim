@@ -5,7 +5,7 @@
       options = {
         globalstatus = true;
         icons_enabled = true;
-        theme = "rosepine";
+        theme = "tokyonight";
         disabledFileypes = {
           statusline = [
             "alpha"
