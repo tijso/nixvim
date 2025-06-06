@@ -22,6 +22,11 @@
     settings = {
       compile = true;
       dimInactive = true;
+      styles = {
+        italic = true;
+        bold = true;
+        transparency = true;
+      };
       overrides = ''
         function(colors)
           local theme = colors.theme
