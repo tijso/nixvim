@@ -22,10 +22,10 @@
     settings = {
       compile = true;
       dimInactive = true;
+      transparent = true;
       styles = {
         italic = true;
         bold = true;
-        transparency = true;
       };
       overrides = ''
         function(colors)
