@@ -22,7 +22,7 @@
     settings = {
       compile = true;
       dimInactive = true;
-      transparent = true;
+      transparent = false;
       styles = {
         italic = true;
         bold = true;
